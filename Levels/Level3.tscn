@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://clic0mdyuha65"]
+
+[ext_resource type="PackedScene" uid="uid://b1uyv1bgejp6m" path="res://player.tscn" id="1_s0moe"]
+[ext_resource type="Script" path="res://planetary_parent.gd" id="3_p4exf"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_s0moe")]
+position = Vector2(475, 234)
+
+[node name="Planetary Parent" type="Node2D" parent="."]
+script = ExtResource("3_p4exf")
+
+[node name="BulletParent" type="Node2D" parent="."]

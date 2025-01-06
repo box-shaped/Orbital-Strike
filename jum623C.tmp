@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://clic0mdyuha65"]
+
+[ext_resource type="Script" path="res://controller.gd" id="2_fjqle"]
+[ext_resource type="Script" path="res://planetary_parent.gd" id="3_1p3md"]
+[ext_resource type="Texture2D" uid="uid://clsofo8q2lyyk" path="res://icon.svg" id="3_f81rb"]
+[ext_resource type="PackedScene" uid="uid://c5wbsfgdqcooc" path="res://cursedshader.tscn" id="4_vta32"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(500, 500)
+script = ExtResource("2_fjqle")
+
+[node name="Playerbody" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("3_f81rb")
+
+[node name="gunpivot" type="Node2D" parent="CharacterBody2D"]
+
+[node name="Gun" type="Sprite2D" parent="CharacterBody2D/gunpivot"]
+position = Vector2(50, 0)
+scale = Vector2(0.5, 0.2)
+texture = ExtResource("3_f81rb")
+
+[node name="Bulletshooter" type="CPUParticles2D" parent="CharacterBody2D/gunpivot/Gun"]
+emitting = false
+amount = 1
+lifetime = 2.0
+one_shot = true
+speed_scale = 9.4
+explosiveness = 1.0
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(0.1, 0.1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+
+[node name="Planetary Parent" type="Node2D" parent="."]
+script = ExtResource("3_1p3md")
+
+[node name="Planet" parent="Planetary Parent" instance=ExtResource("4_vta32")]

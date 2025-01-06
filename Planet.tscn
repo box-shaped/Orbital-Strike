@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5wbsfgdqcooc"]
+
+[ext_resource type="Script" path="res://Planet.gd" id="1_2527t"]
+[ext_resource type="Texture2D" uid="uid://t1rbnpufrf12" path="res://svgviewer-output.svg" id="2_dqq6b"]
+[ext_resource type="Shader" path="res://Planetshader.gdshader" id="2_v0fn1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_klec7"]
+resource_local_to_scene = true
+shader = ExtResource("2_v0fn1")
+shader_parameter/color = Color(0, 0.698039, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7mat6"]
+radius = 50.4
+
+[sub_resource type="LabelSettings" id="LabelSettings_rfpp0"]
+font_size = 25
+
+[sub_resource type="Curve2D" id="Curve2D_ejbwj"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector2Array(0, -24.3787, 0, 25, 50, 0, 30, 0, -30, 0, 0, 50, 0, 25, 0, -25, -50, 0, -30, 0, 30, 0, 0, -50, 0.795, -25, 0, 0, 50, 0)
+}
+point_count = 5
+
+[node name="Planet" type="StaticBody2D"]
+script = ExtResource("1_2527t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_klec7")
+texture = ExtResource("2_dqq6b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7mat6")
+
+[node name="Debug label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -19.0
+offset_right = 36.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "15768"
+label_settings = SubResource("LabelSettings_rfpp0")
+
+[node name="Path2D" type="Path2D" parent="."]
+rotation = -1.5708
+curve = SubResource("Curve2D_ejbwj")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(2.56745, -49.9385)
+rotation = 0.0481139
+scale = Vector2(0.5, 0.5)
+progress = 238.131

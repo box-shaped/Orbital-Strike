@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://csbp13etlt0mm"]
+
+[ext_resource type="Texture2D" uid="uid://clsofo8q2lyyk" path="res://icon.svg" id="1_2p3oa"]
+[ext_resource type="Script" path="res://facility.gd" id="1_36y47"]
+
+[node name="Facility" type="Node2D"]
+script = ExtResource("1_36y47")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-16.4, -26)
+texture = ExtResource("1_2p3oa")
+texture_offset = Vector2(3.97, 14.045)
+texture_scale = Vector2(1.605, 1.605)
+polygon = PackedVector2Array(4, -2, 16, 27, 28, -2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.399998, -36)
+scale = Vector2(1.03125, 0.3)
+texture = ExtResource("1_2p3oa")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-24.4, -19)
+scale = Vector2(0.3, 0.828125)
+texture = ExtResource("1_2p3oa")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(22.6, -19)
+scale = Vector2(0.3, 0.84375)
+texture = ExtResource("1_2p3oa")
