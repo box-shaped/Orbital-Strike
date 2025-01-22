@@ -1,7 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://csbp13etlt0mm"]
+[gd_scene load_steps=7 format=3 uid="uid://csbp13etlt0mm"]
 
 [ext_resource type="Texture2D" uid="uid://clsofo8q2lyyk" path="res://icon.svg" id="1_2p3oa"]
 [ext_resource type="Script" path="res://facility.gd" id="1_36y47"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vwox"]
+size = Vector2(70, 56)
+
+[sub_resource type="Curve" id="Curve_go0t6"]
+_data = [Vector2(0, 1), 0.0, -2.62706, 0, 0, Vector2(1, 0.043956), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x8alo"]
+curve = SubResource("Curve_go0t6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gsnli"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -154.8
+angle_max = 162.6
+spread = 180.0
+initial_velocity_min = 21.49
+initial_velocity_max = 48.37
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 54.84
+linear_accel_max = 100.0
+radial_accel_min = -2.23517e-06
+radial_accel_max = 18.28
+alpha_curve = SubResource("CurveTexture_x8alo")
 
 [node name="Facility" type="Node2D"]
 script = ExtResource("1_36y47")
@@ -27,3 +54,20 @@ texture = ExtResource("1_2p3oa")
 position = Vector2(22.6, -19)
 scale = Vector2(0.3, 0.84375)
 texture = ExtResource("1_2p3oa")
+
+[node name="facility" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="facility"]
+position = Vector2(-1, -21)
+shape = SubResource("RectangleShape2D_4vwox")
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_gsnli")
+texture = ExtResource("1_2p3oa")
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="area_entered" from="facility" to="." method="_on_detector_area_entered"]
+[connection signal="body_entered" from="facility" to="." method="_on_detector_body_entered"]
+[connection signal="finished" from="Explosion" to="." method="_on_explosion_finished"]

@@ -10,7 +10,7 @@ var acceleration: Vector2 = Vector2(0, 0)
 @export var top_acceleration: Vector2 = Vector2(20, 20)
 @export var pew = 0.5
 @export_category("Trajectory Prediction")
-@export var trajectory_steps = 5000
+@export var trajectory_steps = 500
 var readyforprocess=false
 @export var trajectory_step_time = 0.1
 @export var thrust = 1.3
@@ -31,12 +31,13 @@ func player_shoot(event: Vector2):
 	# Launch the player in the opposite direction to the bullet
 	
 	var bullet = preload("res://bullet.tscn").instantiate()
+	$"../BulletParent".add_child(bullet)
 	bullet.rotation = $gunpivot.rotation
 	bullet.velocity = Vector2(cos($gunpivot.rotation), sin($gunpivot.rotation)) * pew
 	bullet.position = position
 	generate_trajectory(bullet.position, bullet.velocity)
 	draw_trajectory()
-	$"../BulletParent".add_child(bullet)
+	# $"../BulletParent".add_child(bullet)
 	velocity += get_global_mouse_position().direction_to(position).normalized() * recoil
 	
 

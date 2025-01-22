@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5wbsfgdqcooc"]
+[gd_scene load_steps=9 format=3 uid="uid://c5wbsfgdqcooc"]
 
 [ext_resource type="Script" path="res://Planet.gd" id="1_2527t"]
 [ext_resource type="Texture2D" uid="uid://t1rbnpufrf12" path="res://svgviewer-output.svg" id="2_dqq6b"]
@@ -21,6 +21,9 @@ _data = {
 "points": PackedVector2Array(0, -24.3787, 0, 25, 50, 0, 30, 0, -30, 0, 0, 50, 0, 25, 0, -25, -50, 0, -30, 0, 30, 0, 0, -50, 0.795, -25, 0, 0, 50, 0)
 }
 point_count = 5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vjiy3"]
+radius = 50.0
 
 [node name="Planet" type="StaticBody2D"]
 script = ExtResource("1_2527t")
@@ -56,3 +59,8 @@ position = Vector2(2.56745, -49.9385)
 rotation = 0.0481139
 scale = Vector2(0.5, 0.5)
 progress = 238.131
+
+[node name="Planet" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
+shape = SubResource("CircleShape2D_vjiy3")

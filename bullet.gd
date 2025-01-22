@@ -8,6 +8,7 @@ var acceleration = Vector2(0,0)
 var thrust_vector= Vector2(0,0)
 var resultant_gravity = Vector2(0,0)
 var timer = 0
+var active = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,13 +26,14 @@ func _physics_process(delta: float) -> void:
 	##m1 and m2 are the masses of the bodies, 
 	##and d is the distance between them.
 	## or so sayeth google
+	if !active:return
 	delta*=40
 	move_and_collide(velocity * delta)  # Correctly scale velocity with delta
 	acceleration = Vector2.ZERO
 	acceleration += processMovement($"../../Planetary Parent".get_children())
 	velocity += acceleration * delta  # Scale acceleration by delta
 	thrust_vector = thrust * position.direction_to(position + velocity).normalized()
-	print("b", thrust_vector / velocity)
+	#print("b", thrust_vector / velocity)
 	velocity += (thrust_vector / velocity.length_squared()) * delta  # Apply thrust with delta
 	
 	# Clamp velocity and acceleration
@@ -66,12 +68,31 @@ func processMovement(bodies: Array) -> Vector2:
 func draw():
 		#draw_line(Vector2.ZERO, velocity * 50, Color.RED)  # Velocity vector
 	$Lines/Velocity.set_point_position(1,velocity*10)
-	print("velocity",velocity)
+	#print("velocity",velocity)
 	$Lines/Acceleration.set_point_position(1,acceleration*10)
-	print("acceleration",acceleration)
+	#print("acceleration",acceleration)
 	$Lines/GravityForce.set_point_position(1,resultant_gravity*10)
-	print("gravity",resultant_gravity)
+	#print("gravity",resultant_gravity)
 	$Lines/Thrust.set_point_position(1,thrust_vector*10)
-	print("thrust",thrust_vector)
+	#print("thrust",thrust_vector)
 	#$Thrust.set_point_position(1,velocity*20)
 	
+func destruct():
+	active=0
+	$Texture.visible=false
+	$Lines.visible=false
+	$Explosion.emitting= true
+	velocity=Vector2.ZERO
+	
+
+func _on_bullet_area_entered(area: Area2D) -> void:
+	if area.name == "facility":
+		area.get_parent().destruct()
+		destruct()
+	else:
+		destruct()
+		
+
+
+func _on_explosion_finished() -> void:
+	self.queue_free()

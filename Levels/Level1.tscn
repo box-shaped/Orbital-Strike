@@ -16,9 +16,13 @@ script = ExtResource("3_p4exf")
 [node name="Planet" parent="Planetary Parent" instance=ExtResource("3_a8dqr")]
 position = Vector2(124, 48)
 
+[node name="Facility" parent="Planetary Parent/Planet" instance=ExtResource("4_hep81")]
+
 [node name="Planet3" parent="Planetary Parent" instance=ExtResource("3_a8dqr")]
 position = Vector2(133, 230)
 rotation_ratio = 0.185
+
+[node name="Facility" parent="Planetary Parent/Planet3" instance=ExtResource("4_hep81")]
 
 [node name="Planet4" parent="Planetary Parent" instance=ExtResource("3_a8dqr")]
 position = Vector2(279, 131)

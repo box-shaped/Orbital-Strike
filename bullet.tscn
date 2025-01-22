@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5kya0xcsuajq"]
+[gd_scene load_steps=17 format=3 uid="uid://b5kya0xcsuajq"]
 
 [ext_resource type="Script" path="res://bullet.gd" id="1_fk55b"]
 [ext_resource type="Texture2D" uid="uid://clsofo8q2lyyk" path="res://icon.svg" id="2_cvjot"]
@@ -73,6 +73,33 @@ scale_over_velocity_max = 1000.0
 scale_over_velocity_curve = SubResource("CurveTexture_ha57s")
 alpha_curve = SubResource("CurveTexture_cr3a4")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05lgl"]
+size = Vector2(63.964, 19.8198)
+
+[sub_resource type="Curve" id="Curve_t7hyu"]
+_data = [Vector2(0, 1), 0.0, -2.62706, 0, 0, Vector2(1, 0.043956), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cgbnj"]
+curve = SubResource("Curve_t7hyu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wjyqs"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -154.8
+angle_max = 162.6
+spread = 180.0
+initial_velocity_min = 21.49
+initial_velocity_max = 48.37
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 54.84
+linear_accel_max = 100.0
+radial_accel_min = -2.23517e-06
+radial_accel_max = 18.28
+alpha_curve = SubResource("CurveTexture_cgbnj")
+
 [node name="Bullet" type="CharacterBody2D"]
 scale = Vector2(1.11, 1.11)
 motion_mode = 1
@@ -89,7 +116,7 @@ position = Vector2(-0.0900904, 0)
 shape = SubResource("RectangleShape2D_4qxqw")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Texture" type="Sprite2D" parent="."]
 scale = Vector2(1, 0.3)
 texture = ExtResource("2_cvjot")
 
@@ -132,3 +159,20 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_i8f55")
 texture = ExtResource("4_qnk3m")
 lifetime = 2.0
+
+[node name="bullet" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bullet"]
+position = Vector2(-0.45045, -0.9009)
+shape = SubResource("RectangleShape2D_05lgl")
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+scale = Vector2(0.4, 0.4)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_wjyqs")
+texture = ExtResource("2_cvjot")
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="area_entered" from="bullet" to="." method="_on_bullet_area_entered"]
+[connection signal="finished" from="Explosion" to="." method="_on_explosion_finished"]
