@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnfqfw77y1syg"]
+
+[ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_wwlme"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wwlme")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="start" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="level" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Level Select"
+
+[node name="settings" type="Button" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Settings"
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/level" to="." method="_on_level_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/settings" to="." method="_on_settings_pressed"]

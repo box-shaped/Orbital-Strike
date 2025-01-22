@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1uyv1bgejp6m"]
+[gd_scene load_steps=4 format=3 uid="uid://b1uyv1bgejp6m"]
 
 [ext_resource type="Script" path="res://controller.gd" id="1_ktmxn"]
 [ext_resource type="Texture2D" uid="uid://clsofo8q2lyyk" path="res://icon.svg" id="2_1tomr"]
+
+[sub_resource type="Gradient" id="Gradient_fwus4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ktmxn")
@@ -42,3 +45,4 @@ polygon = PackedVector2Array(32, 32, 32, -32, -32, -32, -32, 32)
 [node name="TrajectoryLine" type="Line2D" parent="."]
 top_level = true
 width = 2.0
+gradient = SubResource("Gradient_fwus4")

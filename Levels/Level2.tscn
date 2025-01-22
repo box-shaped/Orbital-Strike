@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://clic0mdyuha65"]
+[gd_scene load_steps=5 format=3 uid="uid://clic0mdyuha65"]
 
 [ext_resource type="PackedScene" uid="uid://b1uyv1bgejp6m" path="res://player.tscn" id="1_s0moe"]
+[ext_resource type="PackedScene" uid="uid://c5wbsfgdqcooc" path="res://Planet.tscn" id="3_a5woa"]
 [ext_resource type="Script" path="res://planetary_parent.gd" id="3_p4exf"]
+[ext_resource type="PackedScene" uid="uid://csbp13etlt0mm" path="res://facility.tscn" id="4_4xdjq"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,5 +12,17 @@ position = Vector2(475, 234)
 
 [node name="Planetary Parent" type="Node2D" parent="."]
 script = ExtResource("3_p4exf")
+
+[node name="Planet" parent="Planetary Parent" instance=ExtResource("3_a5woa")]
+position = Vector2(631, 388)
+
+[node name="Planet2" parent="Planetary Parent" instance=ExtResource("3_a5woa")]
+position = Vector2(313, 116)
+
+[node name="Planet3" parent="Planetary Parent" instance=ExtResource("3_a5woa")]
+position = Vector2(218, 320)
+density = 2
+
+[node name="Facility" parent="Planetary Parent/Planet3" instance=ExtResource("4_4xdjq")]
 
 [node name="BulletParent" type="Node2D" parent="."]

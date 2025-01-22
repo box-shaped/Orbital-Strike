@@ -167,7 +167,6 @@ position = Vector2(-0.45045, -0.9009)
 shape = SubResource("RectangleShape2D_05lgl")
 
 [node name="Explosion" type="GPUParticles2D" parent="."]
-scale = Vector2(0.4, 0.4)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_wjyqs")
 texture = ExtResource("2_cvjot")
